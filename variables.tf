@@ -3,95 +3,95 @@
 ####################  Global Variables ########################
 
 variable "owner" {
-  default = ""
+  default     = ""
   description = "Please enter the owner"
-  type = string
+  type        = string
 }
 
 
 variable "location" {
-    default = "West Europe"
-    type = string
-    description = "Please specify the location"
-  
+  default     = "West US"
+  type        = string
+  description = "Please specify the location"
+
 }
 
 variable "resource_group_name" {
-    default = ""
-    type =  string 
-    description = "Please specify the resource group name " 
+  default     = ""
+  type        = string
+  description = "Please specify the resource group name "
 
 }
 
 variable "storage_account_name" {
-    default = ""
-    type =  string 
-    description = "Please specify the storage account name" 
+  default     = ""
+  type        = string
+  description = "Please specify the storage account name"
 
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "Please specify the environment"
-  default = ""
+  default     = ""
 
 }
 
 ######################### Function App Variable #########################
 
 variable "function_app_plan_name" {
-    default = ""
-    type =  string 
-    description = "Please specify the function app plan name" 
+  default     = ""
+  type        = string
+  description = "Please specify the function app plan name"
 
 }
 variable "function_app_name" {
-    default = ""
-    type =  string 
-    description = "Please specify the function app name" 
+  default     = ""
+  type        = string
+  description = "Please specify the function app name"
 
 }
 
 ##########################  App Service Variables #########################
 
 variable "app_service_name" {
-    default = ""
-    description = "Please specify the function app service name" 
-    type = string
-  
+  default     = ""
+  description = "Please specify the function app service name"
+  type        = string
+
 }
 
 variable "app_service_port" {
-  default = ""
-  description = "Please specify the function app service port" 
-  type = string
+  default     = ""
+  description = "Please specify the function app service port"
+  type        = string
 }
 
 
 variable "app_service_image" {
-  type = string
+  type        = string
   description = "Please specify the function app service image"
-  default = ""
+  default     = ""
 }
 
 variable "app_service_image_tag" {
-    type = string
-    description = "Please specify the function app service image tag"
-    default = ""
+  type        = string
+  description = "Please specify the function app service image tag"
+  default     = ""
 }
 
 ##########################  Logic app  #########################
 
 variable "logic_app_name_workflow" {
-  default = ""
+  default     = ""
   description = "This is my logic app name"
-  type = string
-  
+  type        = string
+
 }
 
 variable "logic_app_name_standard" {
-  default = ""
+  default     = ""
   description = "This is my logic app name"
-  type = string
-  
+  type        = string
+
 }

@@ -29,7 +29,7 @@ variable "location" {
 
 
 variable "resource_group_name" {
-    default = "rg-vterra-vik"
+    default = "rg-vterra-vik-aappserv"
     type =  string 
     description = "Please specify the resource group name " 
 
