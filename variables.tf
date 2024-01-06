@@ -16,6 +16,11 @@ variable "location" {
 
 }
 
+variable "rg_shared_name" {
+  type        = string
+  default     = "rg-vterra-vik-master"
+}
+
 variable "resource_group_name" {
   default     = ""
   type        = string
