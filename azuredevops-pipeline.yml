@@ -1,0 +1,202 @@
+# trigger:
+  # branches:
+    # include:
+    # - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+parameters:
+  - name: Deploy
+    displayName: Deploy Services
+    type: boolean
+    default: true
+  - name: Update
+    displayName: Update Services
+    type: boolean
+    default: false
+  - name: Destroy
+    displayName: Destroy Services
+    type: boolean
+    default: false
+  - name: Service
+    displayName: Services
+    type: string
+    default: "function-app"
+    values:
+    - app-service
+    - function-app
+    - logic-app
+variables:
+- name: AzureServiceConnection
+  value: serv-conn-ado-2-azure-infra-subsc-4-devops-pocs
+- name: terraformVersion
+  value : 1.5.4
+- name: AzureResourceGroupName
+  value: "slovink-io"
+- name: AzureSubscription
+  value: "d07f5239-e36f-449f-87c5-9db440504b42"
+- name: AzureLocation
+  value: "eastus"
+- name: AzurestorageAccountName
+  value: "slovinkio"
+- name: ProjectName
+  value: "right"
+- name: StorageContainer
+  value: "tfstate"
+- name: PlatformName
+  value: "cops"
+- name: Environment
+  value: "development"
+stages:
+  - stage: Prepare
+    displayName: Initialization
+    jobs:
+    - job: prepare
+      steps:
+      - checkout: self
+        displayName: 'Checkout repository'
+  - stage: App_Service
+    condition: and(always(), eq(${{ parameters.Deploy }}, true), eq('${{ parameters.Service }}', 'app-service'))
+    displayName: App Service
+    jobs:
+    - job: init
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/app-service/'
+          backendType: 'azurerm'
+          ensureBackend: true
+          backendServiceArm: $(AzureServiceConnection)
+          backendAzureRmSubscriptionId: $(AzureSubscription)
+          backendAzureRmResourceGroupName: $(AzureResourceGroupName)
+          backendAzureRmResourceGroupLocation: $(AzureLocation)
+          backendAzureRmStorageAccountName: $(AzurestorageAccountName)
+          backendAzureRmContainerName: $(StorageContainer)
+          backendAzureRmKey: ${{ parameters.Service }}.terraform.tfstate
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Validate'
+        inputs:
+          command: 'validate'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/app-service/'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Plan'
+        inputs:
+          command: 'plan'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/app-service/'
+          environmentServiceNameAzureRM: $(AzureServiceConnection)
+          commandOptions: '-out=tfplan'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Apply'
+        inputs:
+          command: 'apply'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/app-service/'
+          environmentServiceNameAzureRM:  $(AzureServiceConnection)
+          commandOptions: '-auto-approve -input=false tfplan'
+
+  - stage: Function_App
+    condition: and(always(), eq(${{ parameters.Deploy }}, true), eq('${{ parameters.Service }}', 'function-app'))
+    displayName: Function App
+    jobs:
+    - job: init
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/function-app/'
+          backendType: 'azurerm'
+          ensureBackend: true
+          backendServiceArm: $(AzureServiceConnection)
+          backendAzureRmSubscriptionId: $(AzureSubscription)
+          backendAzureRmResourceGroupName: $(AzureResourceGroupName)
+          backendAzureRmResourceGroupLocation: $(AzureLocation)
+          backendAzureRmStorageAccountName: $(AzurestorageAccountName)
+          backendAzureRmContainerName: $(StorageContainer)
+          backendAzureRmKey: ${{ parameters.Service }}.terraform.tfstate
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Validate'
+        inputs:
+          command: 'validate'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/function-app/'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Plan'
+        inputs:
+          command: 'plan'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/function-app/'
+          environmentServiceNameAzureRM: $(AzureServiceConnection)
+          commandOptions: '-out=tfplan'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Apply'
+        inputs:
+          command: 'apply'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/function-app/'
+          environmentServiceNameAzureRM:  $(AzureServiceConnection)
+          commandOptions: '-auto-approve -input=false tfplan'
+  - stage: Logic_App
+    condition: and(always(), eq(${{ parameters.Deploy }}, true), eq('${{ parameters.Service }}', 'logic-app'))
+    displayName: Logic App
+    jobs:
+    - job: init
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/logic-app/'
+          backendType: 'azurerm'
+          ensureBackend: true
+          backendServiceArm: $(AzureServiceConnection)
+          backendAzureRmSubscriptionId: $(AzureSubscription)
+          backendAzureRmResourceGroupName: $(AzureResourceGroupName)
+          backendAzureRmResourceGroupLocation: $(AzureLocation)
+          backendAzureRmStorageAccountName: $(AzurestorageAccountName)
+          backendAzureRmContainerName: $(StorageContainer)
+          backendAzureRmKey: ${{ parameters.Service }}.terraform.tfstate
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Validate'
+        inputs:
+          command: 'validate'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/logic-app/'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Plan'
+        inputs:
+          command: 'plan'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/logic-app/'
+          environmentServiceNameAzureRM: $(AzureServiceConnection)
+          commandOptions: '-out=tfplan'
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Apply'
+        inputs:
+          command: 'apply'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/app-service/'
+          environmentServiceNameAzureRM:  $(AzureServiceConnection)
+          commandOptions: '-auto-approve -input=false tfplan'
+  - stage: Destroy
+    condition: and(always(), eq(${{ parameters.Destroy }}, true))
+    displayName: Destroy
+    jobs:
+    - job: init
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/${{ parameters.Service }}/'
+          backendType: 'azurerm'
+          ensureBackend: true
+          backendServiceArm: $(AzureServiceConnection)
+          backendAzureRmSubscriptionId: $(AzureSubscription)
+          backendAzureRmResourceGroupName: $(AzureResourceGroupName)
+          backendAzureRmResourceGroupLocation: $(AzureLocation)
+          backendAzureRmStorageAccountName: $(AzurestorageAccountName)
+          backendAzureRmContainerName: $(StorageContainer)
+          backendAzureRmKey: ${{ parameters.Service }}.terraform.tfstate
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Destroy'
+        inputs:
+          command: 'destroy'
+          workingDirectory: '$(Build.SourcesDirectory)/deploy/${{ parameters.Service }}/'
+          environmentServiceNameAzureRM: $(AzureServiceConnection)
+          commandOptions: '-auto-approve'

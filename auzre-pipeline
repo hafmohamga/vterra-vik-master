@@ -1,0 +1,112 @@
+# trigger:
+  # branches:
+    # include:
+    # - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+parameters:
+  - name: Deploy
+    displayName: Deploy Services
+    type: boolean
+    default: true
+  - name: Update
+    displayName: Update Services
+    type: boolean
+    default: false
+  - name: Destroy
+    displayName: Destroy Services
+    type: boolean
+    default: false
+stages:
+  - stage: Prepare
+    displayName: Initialization
+    jobs:
+    - job: prepare
+      steps:
+      - checkout: self
+        displayName: 'Checkout repository'
+  - stage: Init
+    displayName: Terraform Initialization
+    jobs:
+    - job: init
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Init'
+        inputs:
+          command: 'init'
+          workingDirectory: '$(Build.SourcesDirectory)'
+          backendType: 'azurerm'
+          ensureBackend: true
+          backendServiceArm: serv-conn-ado-2-azure-infra-subsc-4-devops-pocs
+          backendAzureRmResourceGroupName: rg-devops
+          backendAzureRmStorageAccountName: strgacctpocsrm
+          backendAzureRmContainerName: tfstate
+          backendAzureRmKey: srmpoc
+  - stage: Validate
+    displayName: Terraform Validate
+    jobs:
+    - job: Validate
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Validate'
+        inputs:
+          command: 'validate'
+          workingDirectory: '$(Build.SourcesDirectory)'
+  - stage: Plan
+    displayName: Terraform Plan
+    jobs:
+    - job: Plan
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Plan'
+        inputs:
+          command: 'plan'
+          workingDirectory: '$(Build.SourcesDirectory)'
+          environmentServiceNameAzureRM: serv-conn-ado-2-azure-infra-subsc-4-devops-pocs
+          commandOptions: '-out=tfplan'
+  - stage: Apply
+    condition: and(succeeded(), or(eq(${{ parameters.Deploy }}, true),eq(${{ parameters.Update }}, true)))
+    displayName: Terraform Apply
+    jobs:
+    - job: Plan
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Apply'
+        inputs:
+          command: 'apply'
+          workingDirectory: '$(Build.SourcesDirectory)'
+          environmentServiceNameAzureRM: serv-conn-ado-2-azure-infra-subsc-4-devops-pocs
+          commandOptions: '-auto-approve -input=false tfplan'
+
+  - stage: SecurityScan
+    displayName: Security Scan
+    jobs:
+    - job: Scan
+      steps:
+       - task: AdvancedSecurity-Dependency-Scanning@1
+
+  - stage: CodeAnalysisLogs
+    displayName: CodeAnalysisLogs
+    jobs:
+    - job: Plan
+      steps:
+      - task: MicrosoftSecurityDevOps@1
+        displayName: 'Microsoft Security DevOps'
+        inputs:
+          command: 'run'
+          artifactName: 'CodeAnalysisLogs'
+
+  - stage: Destroy
+    condition: and(succeeded(), eq(${{ parameters.Destroy }}, true)
+    displayName: Terraform Apply
+    jobs:
+    - job: Plan
+      steps:
+      - task: TerraformTaskV4@4
+        displayName: 'Terraform Apply'
+        inputs:
+          command: 'apply'
+          workingDirectory: '$(Build.SourcesDirectory)'
+          environmentServiceNameAzureRM: serv-conn-ado-2-azure-infra-subsc-4-devops-pocs
+          commandOptions: '-auto-approve -input=false tfplan'
