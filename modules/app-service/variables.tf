@@ -29,7 +29,7 @@ variable "location" {
 
 
 variable "resource_group_name" {
-    default = ""
+    default = "rg-vterra-vik"
     type =  string 
     description = "Please specify the resource group name " 
 
