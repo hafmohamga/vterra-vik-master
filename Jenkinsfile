@@ -40,7 +40,7 @@ pipeline {
                             sh 'terraform fmt'
                             sh 'terraform init -upgrade'
                             //sh " terraform apply --auto-approve -var 'resourcegroupname=${env.RES_GROUP}' -var 'appserviceplanname=${env.APPSERVICE_PLAN_NAME}' -var 'webappname=${env.WEBAPP_NAME}' -var 'workspacename=${env.WORKSPACE_NAME}'"
-                            sh " terraform apply --auto-approve "
+                            sh 'terraform apply --auto-approve'
                         }
                 }
                 }
