@@ -13,8 +13,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafeez-jenkins-token', url: 'https://github.com/hafmoham/001-task-azure-app-service-law-jenkins-terra']])
-                    checkout scmGit(branches: [[name: '*/HafeezDev']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafeez-jenkins-token', url: 'https://github.com/hafmoham/001-task-azure-app-service-law-jenkins-terra']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafeez-jenkins-token', url: 'https://github.com/hafmoham/vterra-vik-master']])
+                    //checkout scmGit(branches: [[name: '*/HafeezDev']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafeez-jenkins-token', url: 'https://github.com/hafmoham/001-task-azure-app-service-law-jenkins-terra']])
                 }
             }
         }
