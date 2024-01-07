@@ -1,20 +1,20 @@
 
 variable "storage_account_name" {
-  default     = "myapptest"
+  default     = ""
   description = "Enter the name of the storage acccount"
   type        = string
 
 }
 
 variable "logic_app_name_workflow" {
-  default     = "myapptest"
+  default     = ""
   description = "This is my logic app name"
   type        = string
 
 }
 
 variable "logic_app_name_standard" {
-  default     = "myapptests"
+  default     = ""
   description = "This is my logic app name"
   type        = string
 
