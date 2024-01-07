@@ -1,7 +1,12 @@
 
+# resource "azurerm_resource_group" "rg" {
+#   name     = "rg_vterra_appserv"
+#   location = var.location
+# }
+
 resource "azurerm_resource_group" "rg" {
-  name     = "rg_vterra_appserv"
   location = var.location
+  name     = var.resource_group_name
 }
 
 # Create app service plan
