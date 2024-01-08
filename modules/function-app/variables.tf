@@ -2,14 +2,14 @@
 ####################  Global Variables ########################
 
 variable "location" {
-    default = "West Europe"
+    default = "East US"
     type = string
     description = "Please specify the location"
   
 }
 
 variable "resource_group_name" {
-    default = "rg-vterra-vik-tfvars"
+    default = ""
     type =  string 
     description = "Please specify the resource group name " 
 
@@ -37,7 +37,7 @@ variable "function_app_name" {
 }
 
 variable "azurerm_application_insights_name" {
-  default     = ""
+  default     = "appinsights4logs"
   type        = string
   description = "Please specify the function app name"
 

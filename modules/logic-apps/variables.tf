@@ -1,4 +1,10 @@
 
+variable "resource_group_name" {
+  default     = ""
+  type        = string
+  description = "Name of the resource group"
+
+}
 variable "storage_account_name" {
   default     = ""
   description = "Enter the name of the storage acccount"
@@ -43,9 +49,3 @@ variable "parameter" {
   description = "A map of Key-Value pairs."
 }
 
-variable "resource_group_name" {
-  default     = ""
-  type        = string
-  description = "Name of the resource group"
-
-}

@@ -1,8 +1,8 @@
-# provider "azurerm" {
-#     features {}
-# }
+# # provider "azurerm" {
+# #     features {}
+# # }
 
-########## Modules ################
+# ########## Modules ################
 
 module "function-app" {
   source                 = "./modules/function-app"
@@ -25,12 +25,22 @@ module "app-service" {
   docker_image_tag = var.app_service_image_tag
 }
 
-module "logic-app" {
-  depends_on              = [module.app-service]
-  source                  = "./modules/logic-apps"
-  logic_app_name_workflow = var.logic_app_name_workflow
-  logic_app_name_standard = var.logic_app_name_standard
-  location                = var.location
-  resource_group_name     = var.resource_group_name
+# module "logic-app" {
+#   depends_on              = [module.app-service]
+#   source                  = "./modules/logic-apps"
+#   logic_app_name_workflow = var.logic_app_name_workflow
+#   logic_app_name_standard = var.logic_app_name_standard
+#   location                = var.location
+#   resource_group_name     = var.resource_group_name
+#   storage_account_name    = var.storage_account_name
+# }
 
-}
+# resource "azurerm_storage_account" "importstorageacct" {
+#   name                             = "strgacctvterra0001"
+#   resource_group_name              = "rg-secondary-vterra"
+#   location                         = "eastus"
+#   account_tier                     = "Standard"
+#   account_replication_type         = "LRS"
+#   allow_nested_items_to_be_public  = false
+#   cross_tenant_replication_enabled = false
+# }

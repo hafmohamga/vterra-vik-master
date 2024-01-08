@@ -16,7 +16,7 @@ resource "azurerm_service_plan" "service_plan" {
   resource_group_name = var.resource_group_name
   os_type             = "Windows"
   sku_name            = "P1v2"
-
+  depends_on = [azurerm_resource_group.rg]
   tags = {
     project    = var.project
     owner       = var.owner
@@ -34,6 +34,6 @@ resource "azurerm_windows_web_app" "example" {
     owner       = var.owner
     environment = var.environment
   }
-
+  depends_on = [azurerm_resource_group.rg]
   site_config {}
 }

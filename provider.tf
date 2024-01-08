@@ -21,10 +21,21 @@ terraform {
       version = "=3.85.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "rg-vterra-tfstate"
+    storage_account_name = "vterratfstate"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   skip_provider_registration = true # This is only required when the User, Service Principal, or Identity running Terraform lacks the permissions to register Azure Resource Providers.
-  features {}
+  features {
+#              resource_group {
+# │                 prevent_deletion_if_contains_resources = true
+# │            }
+  }
 }
