@@ -27,7 +27,7 @@ module "app-service" {
 
 module "logic-app" {
   # depends_on              = [module.app-service]
-  source                  = "./modules/logic-apps"
+  source                  = "./modules/logic-app"
   logic_app_name_workflow = var.logic_app_name_workflow
   logic_app_name_standard = var.logic_app_name_standard
   location                = var.location
