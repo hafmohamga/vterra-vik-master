@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   location = var.location
-  name     = "rg-vterra-4-logicapps"  # var.resource_group_name
+  name     =  var.resource_group_name
 }
 
 resource "azurerm_logic_app_workflow" "main" {
@@ -8,6 +8,7 @@ resource "azurerm_logic_app_workflow" "main" {
   location            = var.location
   resource_group_name = var.resource_group_name
   depends_on = [azurerm_resource_group.rg]
+ 
 }
 
 
@@ -26,7 +27,7 @@ resource "azurerm_app_service_plan" "service_plan" {
   resource_group_name = var.resource_group_name
   kind                = "elastic"
   depends_on = [azurerm_resource_group.rg]
-
+  
   sku {
     tier = "WorkflowStandard"
     size = "WS1"
@@ -41,6 +42,7 @@ resource "azurerm_logic_app_standard" "standard" {
   storage_account_name       = azurerm_storage_account.storageAccount.name
   storage_account_access_key = azurerm_storage_account.storageAccount.primary_access_key
   depends_on = [azurerm_resource_group.rg]
+ 
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME"     = "node"

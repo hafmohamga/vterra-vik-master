@@ -25,10 +25,27 @@ variable "resource_group_name" {
   default     = ""
   type        = string
   description = "Please specify the resource group name "
+}
 
+variable "resource_group_name1" {
+  default     = ""
+  type        = string
+  description = "Please specify the resource group name "
 }
 
 variable "storage_account_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the storage account name"
+}
+
+variable "storage_account_function_app" {
+  default     = ""
+  type        = string
+  description = "Please specify the storage account name"
+}
+
+variable "storage_account_name1" {
   default     = ""
   type        = string
   description = "Please specify the storage account name"

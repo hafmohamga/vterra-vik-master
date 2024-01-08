@@ -6,16 +6,16 @@
 
 module "function-app" {
   source                 = "./modules/function-app"
-  resource_group_name    = var.resource_group_name
-  storage_account_name   = var.storage_account_name
-  location               = var.location
+  # resource_group_name    = var.resource_group_name
+  storage_account_name   = var.storage_account_function_app
+  # location               = var.location
   function_app_plan_name = var.function_app_plan_name
   function_app_name      = var.function_app_name
 }
 
 module "app-service" {
   source           = "./modules/app-service"
-  location         = var.location
+  # location         = var.location
   environment      = var.environment
   owner            = var.owner
   description      = "Linux Docker container app"
@@ -26,13 +26,13 @@ module "app-service" {
 }
 
 module "logic-app" {
-  depends_on              = [module.app-service]
+  # depends_on              = [module.app-service]
   source                  = "./modules/logic-apps"
   logic_app_name_workflow = var.logic_app_name_workflow
   logic_app_name_standard = var.logic_app_name_standard
   location                = var.location
-  resource_group_name     = var.resource_group_name
-  storage_account_name    = var.storage_account_name
+  resource_group_name     = var.resource_group_name1
+  storage_account_name    = var.storage_account_name1
 }
 
 # resource "azurerm_storage_account" "importstorageacct" {
