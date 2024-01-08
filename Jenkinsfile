@@ -21,7 +21,7 @@ pipeline {
         stage('Terraform ') {
             steps {
                 script {
-                    dir('terraform') {
+                    dir('.') {
                     sh 'terraform init -upgrade'
                     sh 'terraform apply --auto-approve'
                     }
