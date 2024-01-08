@@ -1,12 +1,13 @@
 resource "azurerm_resource_group" "rg" {
   location = var.location
-  name     = var.resource_group_name
+  name     = "rg-vterra-4-logicapps"  # var.resource_group_name
 }
 
 resource "azurerm_logic_app_workflow" "main" {
   name                = var.logic_app_name_workflow
   location            = var.location
   resource_group_name = var.resource_group_name
+  depends_on = [azurerm_resource_group.rg]
 }
 
 

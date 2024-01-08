@@ -25,15 +25,15 @@ module "app-service" {
   docker_image_tag = var.app_service_image_tag
 }
 
-# module "logic-app" {
-#   depends_on              = [module.app-service]
-#   source                  = "./modules/logic-apps"
-#   logic_app_name_workflow = var.logic_app_name_workflow
-#   logic_app_name_standard = var.logic_app_name_standard
-#   location                = var.location
-#   resource_group_name     = var.resource_group_name
-#   storage_account_name    = var.storage_account_name
-# }
+module "logic-app" {
+  depends_on              = [module.app-service]
+  source                  = "./modules/logic-apps"
+  logic_app_name_workflow = var.logic_app_name_workflow
+  logic_app_name_standard = var.logic_app_name_standard
+  location                = var.location
+  resource_group_name     = var.resource_group_name
+  storage_account_name    = var.storage_account_name
+}
 
 # resource "azurerm_storage_account" "importstorageacct" {
 #   name                             = "strgacctvterra0001"
