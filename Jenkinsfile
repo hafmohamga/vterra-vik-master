@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafmoham', url: 'https://github.com/hafmoham/vterra-vik-master']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'hafmoham', url: 'https://github.com/hafmohamga/vterra-vik-master']])
                 }
             }
         }
