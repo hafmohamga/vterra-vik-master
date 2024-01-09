@@ -38,11 +38,11 @@ variable "storage_account_name" {
   description = "Please specify the storage account name"
 }
 
-# variable "storage_account_function_app" {
-#   default     = ""
-#   type        = string
-#   description = "Please specify the storage account name"
-# }
+variable "function_strg_app_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the storage account name"
+}
 
 # variable "storage_account_name1" {
 #   default     = ""
@@ -60,18 +60,23 @@ variable "storage_account_name" {
 
 # ######################### Function App Variable #########################
 
-# variable "function_app_plan_name" {
-#   default     = ""
-#   type        = string
-#   description = "Please specify the function app plan name"
+variable "function_app_plan_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the function app plan name"
 
-# }
-# variable "function_app_name" {
-#   default     = ""
-#   type        = string
-#   description = "Please specify the function app name"
+}
+variable "function_app_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the function app name"
+}
 
-# }
+variable "function_application_insights_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the function app name"
+}
 
 # ##########################  App Service Variables #########################
 
@@ -103,16 +108,29 @@ variable "storage_account_name" {
 
 # ##########################  Logic app  #########################
 
-# variable "logic_app_name_workflow" {
-#   default     = ""
-#   description = "This is my logic app name"
-#   type        = string
+variable "logic_app_name_workflow" {
+  default     = ""
+  description = "This is my logic app name"
+  type        = string
 
-# }
+}
 
-# variable "logic_app_name_standard" {
-#   default     = ""
-#   description = "This is my logic app name"
-#   type        = string
 
-# }
+variable "logic_strg_app_name" {
+  default     = ""
+  description = "This is my logic app name"
+  type        = string
+}
+
+variable "logic_storage_account_name" {
+  default     = ""
+  description = "This is my logic app name"
+  type        = string
+}
+
+variable "logic_app_name_standard" {
+  default     = ""
+  description = "This is my logic app name"
+  type        = string
+
+}

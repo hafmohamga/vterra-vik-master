@@ -5,19 +5,23 @@
 # }
 
 data "azurerm_resource_group" "globalvterrarg" {
-  name = "rg-vterra-tfvars11"
+  name = var.resource_group_name
 }
 
-
-resource "azurerm_storage_account" "strgacct" {
-  name                     = var.storage_account_name
-  # name                     = "strgacct4vterrafuncapp"
-  resource_group_name      = data.azurerm_resource_group.globalvterrarg.name
-  location                 = data.azurerm_resource_group.globalvterrarg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  # depends_on = [azurerm_resource_group.rg]
+data "azurerm_storage_account" "strgfunc" {
+  name                = var.function_strg_app_name
+  resource_group_name = data.azurerm_resource_group.globalvterrarg.name
 }
+
+# resource "azurerm_storage_account" "strgacct" {
+#   name                     = var.storage_account_name
+#   # name                     = "strgacct4vterrafuncapp"
+#   resource_group_name      = data.azurerm_resource_group.globalvterrarg.name
+#   location                 = data.azurerm_resource_group.globalvterrarg.location
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+#   # depends_on = [azurerm_resource_group.rg]
+# }
 
 
 resource "azurerm_service_plan" "service_plan" {
@@ -36,15 +40,15 @@ resource "azurerm_windows_function_app" "example" {
   resource_group_name      = data.azurerm_resource_group.globalvterrarg.name
   location                 = data.azurerm_resource_group.globalvterrarg.location
 
-  storage_account_name       = azurerm_storage_account.strgacct.name
-  storage_account_access_key = azurerm_storage_account.strgacct.primary_access_key
+  storage_account_name       = data.azurerm_storage_account.strgfunc.name
+  storage_account_access_key = data.azurerm_storage_account.strgfunc.primary_access_key
   service_plan_id            = azurerm_service_plan.service_plan.id
   # depends_on = [azurerm_resource_group.rg]
   site_config {}
 }
 
 resource "azurerm_application_insights" "example" {
-  name                = var.azurerm_application_insights_name
+  name                = var.function_application_insights_name
   resource_group_name      = data.azurerm_resource_group.globalvterrarg.name
   location                 = data.azurerm_resource_group.globalvterrarg.location
   application_type    = "web"

@@ -1,12 +1,6 @@
 
 ####################  Global Variables ########################
 
-variable "location" {
-    default = "East US"
-    type = string
-    description = "Please specify the location"
-  
-}
 
 variable "resource_group_name" {
     default = ""
@@ -15,7 +9,7 @@ variable "resource_group_name" {
 
 }
 
-variable "storage_account_name" {
+variable "function_strg_app_name" {
     default = ""
     type =  string 
     description = "Please specify the storage account name" 
@@ -36,8 +30,8 @@ variable "function_app_name" {
     description = "Please specify the function app name" 
 }
 
-variable "azurerm_application_insights_name" {
-  default     = "appinsights4logs"
+variable "function_application_insights_name" {
+  default     = ""
   type        = string
   description = "Please specify the function app name"
 
