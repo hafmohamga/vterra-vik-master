@@ -7,9 +7,9 @@ variable "project" {
 }
 
 
-variable "owner" {
+variable "VRMMaintainer" {
   default = ""
-  description = "Please enter the owner"
+  description = "Please enter the VRMMaintainer"
   type = string
 }
 
@@ -20,57 +20,29 @@ variable "environment" {
 
 }
 
-variable "location" {
-    default = "West Europe"
-    type = string
-    description = "Please specify the location"
-  
-}
 
 
 variable "resource_group_name" {
-    default = "rg-vterra-vik-aappserv"
+    default = ""
     type =  string 
     description = "Please specify the resource group name " 
 
 }
 
-variable "storage_account_name" {
-    default = ""
-    type =  string 
-    description = "Please specify the storage account name" 
-
-}
 
 
 ##################### App Service #####################
 
-variable "app_name" {
+variable "app_service_plan_name" {
   type        = string
   default = ""
   description = "This variable defines the application name used to build resources.  It must be unique on Azure."
 }
 
-variable "app_port" {
+variable "app_service_win_app_name" {
   type        = string
-  description = "Port used by the web app"
-  default     = "8080"
-}
-
-variable "docker_image" {
   default = ""
-  type        = string
-  description = "Docker image name to deploy in the app service"
+  description = "This variable defines the application name used to build resources.  It must be unique on Azure."
 }
 
-variable "docker_image_tag" {
-  type        = string
-  description = "Docker image tag to deploy"
-  default     = "latest"
-}
 
-variable "description" {
-  default = ""
-  type        = string
-  description = "Provide a description of the resource"
-}

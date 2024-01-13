@@ -26,6 +26,11 @@ variable "logic_strg_app_name" {
 }
 
 
+variable "logic_storage_account_name" {
+  default     = ""
+  description = "This is my logic storage name"
+  type        = string
+}
 
 
 

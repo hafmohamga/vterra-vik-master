@@ -4,7 +4,7 @@ module "app-service" {
   resource_group_name = var.resource_group_name
   location    = var.location
   environment = var.environment
-  owner       = var.owner
+  VRMMaintainer       = var.VRMMaintainer
   description = "windows app"
 
 }

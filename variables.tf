@@ -2,12 +2,23 @@
 
 # ####################  Global Variables ########################
 
-# variable "owner" {
-#   default     = ""
-#   description = "Please enter the owner"
-#   type        = string
-# }
+variable "VRMMaintainer" {
+  default     = ""
+  description = "Please enter the VRMMaintainer"
+  type        = string
+}
 
+variable "project" {
+  default     = ""
+  description = "Please enter the VRMMaintainer"
+  type        = string
+}
+
+variable "environment" {
+  type        = string
+  description = "Please specify the environment"
+  default     = ""
+}
 
 variable "location" {
   default     = ""
@@ -15,22 +26,11 @@ variable "location" {
   description = "Please specify the location"
 }
 
-# # variable "rg_shared_name" {
-# #   type    = string
-# #   default = ""
-# # }
-
 variable "resource_group_name" {
   default     = ""
   type        = string
   description = "Please specify the resource group name "
 }
-
-# variable "resource_group_name1" {
-#   default     = ""
-#   type        = string
-#   description = "Please specify the resource group name "
-# }
 
 variable "storage_account_name" {
   default     = ""
@@ -51,12 +51,7 @@ variable "function_strg_app_name" {
 
 # }
 
-# variable "environment" {
-#   type        = string
-#   description = "Please specify the environment"
-#   default     = ""
 
-# }
 
 # ######################### Function App Variable #########################
 
@@ -80,31 +75,18 @@ variable "function_application_insights_name" {
 
 # ##########################  App Service Variables #########################
 
-# variable "app_service_name" {
-#   default     = ""
-#   description = "Please specify the function app service name"
-#   type        = string
+variable "app_service_plan_name" {
+  default     = ""
+  description = "Please specify the app service plan name"
+  type        = string
+}
 
-# }
+variable "app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the app service app name"
+  type        = string
+}
 
-# variable "app_service_port" {
-#   default     = ""
-#   description = "Please specify the function app service port"
-#   type        = string
-# }
-
-
-# variable "app_service_image" {
-#   type        = string
-#   description = "Please specify the function app service image"
-#   default     = ""
-# }
-
-# variable "app_service_image_tag" {
-#   type        = string
-#   description = "Please specify the function app service image tag"
-#   default     = ""
-# }
 
 # ##########################  Logic app  #########################
 
@@ -132,5 +114,5 @@ variable "logic_app_name_standard" {
   default     = ""
   description = "This is my logic app name"
   type        = string
-
 }
+

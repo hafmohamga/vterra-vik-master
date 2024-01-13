@@ -14,7 +14,7 @@ variable "environment" {
 
 }
 
-variable "owner" {
+variable "VRMMaintainer" {
   type = string
   description = "Please specify the environment"
   default = ""
