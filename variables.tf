@@ -2,6 +2,12 @@
 
 # ####################  Global Variables ########################
 
+variable "VRMConsumer" {
+  default     = ""
+  description = "Please enter the VRMConsumer"
+  type        = string
+}
+
 variable "VRMMaintainer" {
   default     = ""
   description = "Please enter the VRMMaintainer"
@@ -87,6 +93,80 @@ variable "app_service_win_app_name" {
   type        = string
 }
 
+variable "eis-preprod-int-east-asp1-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-EAST-ASP1 app service plan name"
+  type        = string
+}
+
+
+variable "eis-preprod-int-east-asp1-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the app service app name"
+  type        = string
+}
+
+variable "eis-preprod-int-southwest-asp1-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-SOUTHWEST-ASP1 app service plan name"
+  type        = string
+}
+
+variable "eis-preprod-int-southwest-asp1-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the eis-preprod-int-southwest-asp1 app service app name"
+  type        = string
+}
+
+
+variable "eis-preprod-int-east-asp2-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-EAST-ASP2 app service plan name"
+  type        = string
+}
+
+variable "eis-preprod-int-east-asp2-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the eis-preprod-int-east-asp2 app service app name"
+  type        = string
+}
+
+
+variable "eis-preprod-int-southwest-asp2-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-SOUTHWEST-ASP2 app service plan name"
+  type        = string
+}
+
+variable "eis-preprod-int-southwest-asp2-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the eis-preprod-int-southwest-asp2 app service app name"
+  type        = string
+}
+
+variable "eis-preprod-int-east-asp3-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-EAST-ASP3 app service plan name"
+  type        = string
+}
+
+variable "eis-preprod-int-east-asp3-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the eis-preprod-int-east-asp3 app service app name"
+  type        = string
+}
+
+variable "eis-preprod-int-southwest-asp3-asp_name" {
+  default     = ""
+  description = "Please specify the EIS-PREPROD-INT-SOUTHWEST-ASP3 app service plan name"
+  type        = string
+}
+
+variable "eis-preprod-int-southwest-asp3-app_service_win_app_name" {
+  default     = ""
+  description = "Please specify the eis-preprod-int-southwest-asp3 app service app name"
+  type        = string
+}
 
 # ##########################  Logic app  #########################
 

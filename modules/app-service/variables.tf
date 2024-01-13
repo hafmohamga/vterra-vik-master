@@ -6,6 +6,11 @@ variable "project" {
   type = string
 }
 
+variable "VRMConsumer" {
+  default = ""
+  description = "Please enter the VRMConsumer"
+  type = string
+}
 
 variable "VRMMaintainer" {
   default = ""

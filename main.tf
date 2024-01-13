@@ -1,7 +1,3 @@
-# # provider "azurerm" {
-# #     features {}
-# # }
-
 # ########## Modules ################
 
 module "resource-group" {
@@ -16,16 +12,71 @@ module "storage-account" {
   resource_group_name  = var.resource_group_name
 }
 
-
-
-module "app-service" {
+module "eis-preprod-int-east-asp1" {
   source                   = "./modules/app-service"
   environment              = var.environment
-  VRMMaintainer                    = var.VRMMaintainer
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
   project                  = var.project
   resource_group_name      = var.resource_group_name
-  app_service_plan_name    = var.app_service_plan_name
-  app_service_win_app_name = var.app_service_win_app_name
+  app_service_plan_name    = var.eis-preprod-int-east-asp1-asp_name
+  app_service_win_app_name = var.eis-preprod-int-east-asp1-app_service_win_app_name
+}
+
+
+module "eis-preprod-int-southwest-asp1" {
+  source                   = "./modules/app-service"
+  environment              = var.environment
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
+  project                  = var.project
+  resource_group_name      = var.resource_group_name
+  app_service_plan_name    = var.eis-preprod-int-southwest-asp1-asp_name
+  app_service_win_app_name = var.eis-preprod-int-southwest-asp1-app_service_win_app_name
+}
+
+module "eis-preprod-int-east-asp2" {
+  source                   = "./modules/app-service"
+  environment              = var.environment
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
+  project                  = var.project
+  resource_group_name      = var.resource_group_name
+  app_service_plan_name    = var.eis-preprod-int-east-asp2-asp_name
+  app_service_win_app_name = var.eis-preprod-int-east-asp2-app_service_win_app_name
+}
+
+module "eis-preprod-int-southwest-asp2" {
+  source                   = "./modules/app-service"
+  environment              = var.environment
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
+  project                  = var.project
+  resource_group_name      = var.resource_group_name
+  app_service_plan_name    = var.eis-preprod-int-southwest-asp2-asp_name
+  app_service_win_app_name = var.eis-preprod-int-southwest-asp2-app_service_win_app_name
+}
+
+module "eis-preprod-int-east-asp3" {
+  source                   = "./modules/app-service"
+  environment              = var.environment
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
+  project                  = var.project
+  resource_group_name      = var.resource_group_name
+  app_service_plan_name    = var.eis-preprod-int-east-asp3-asp_name
+  app_service_win_app_name = var.eis-preprod-int-east-asp3-app_service_win_app_name
+}
+
+module "eis-preprod-int-southwest-asp3" {
+  source                   = "./modules/app-service"
+  environment              = var.environment
+  VRMConsumer              = var.VRMConsumer
+  VRMMaintainer            = var.VRMMaintainer
+  project                  = var.project
+  resource_group_name      = var.resource_group_name
+  app_service_plan_name    = var.eis-preprod-int-southwest-asp3-asp_name
+  app_service_win_app_name = var.eis-preprod-int-southwest-asp3-app_service_win_app_name
 }
 
 # module "logic-app" {
