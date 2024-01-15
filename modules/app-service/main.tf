@@ -3,14 +3,29 @@ data "azurerm_resource_group" "eis-migration-rg" {
   name = var.resource_group_name
 }
 
+# data "azurerm_resource_group" "eis-rg" {
+#     name = var.eis_preprod_int_east_rg_name
+# }
+
+
+
+
+
 # Create app service plan
 resource "azurerm_service_plan" "service_plan" {
   name                = var.app_service_plan_name  # "${var.app_name}-AppService-plan"
   # name                = "${var.app_service_plan_name}-${var.VRMMaintainer}"  # "${var.app_name}-AppService-plan"
-  resource_group_name      = data.azurerm_resource_group.eis-migration-rg.name
+  resource_group_name      = var.resource_group_name    # data.azurerm_resource_group.eis-migration-rg.name
   location                 = data.azurerm_resource_group.eis-migration-rg.location
   os_type             = "Windows"
-  sku_name            = "P1v2"
+  # sku_name            = "P1v2"
+
+kind                = var.kind
+  sku {
+    tier = var.sku_tier
+    size = var.sku_size
+  }
+
   # depends_on = [azurerm_resource_group.rg]
   tags = {
     project    = var.project

@@ -31,12 +31,34 @@ variable "resource_group_name" {
     default = ""
     type =  string 
     description = "Please specify the resource group name " 
-
 }
 
 
+# variable "eis_preprod_int_east_rg_name" {
+#     default = ""
+#     type =  string 
+#     description = "Please specify the resource group name " 
+# }
+
+# variable "eis_preprod_int_southwest_rg_name" {
+#     default = ""
+#     type =  string 
+#     description = "Please specify the resource group name " 
+# }
 
 ##################### App Service #####################
+
+variable "kind" {
+  description = "Kind of the Application Service Plan"
+}
+
+variable "sku_tier" {
+  description = "SKU Tier of the Application Service Plan"
+}
+
+variable "sku_size" {
+  description = "SKU Size of the Application Service Plan"
+}
 
 variable "app_service_plan_name" {
   type        = string

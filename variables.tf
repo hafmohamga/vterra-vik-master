@@ -38,6 +38,18 @@ variable "resource_group_name" {
   description = "Please specify the resource group name "
 }
 
+variable "eis_preprod_int_east_rg_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the resource group name "
+}
+
+variable "eis_preprod_int_southwest_rg_name" {
+  default     = ""
+  type        = string
+  description = "Please specify the resource group name "
+}
+
 variable "storage_account_name" {
   default     = ""
   type        = string
@@ -80,6 +92,18 @@ variable "function_application_insights_name" {
 }
 
 # ##########################  App Service Variables #########################
+
+variable "asp_kind" {
+  description = "Kind of the Application Service Plans"
+}
+
+variable "asp_sku_tier" {
+  description = "SKU Tier of the Application Service Plans"
+}
+
+variable "asp_sku_size" {
+  description = "SKU Size of the Application Service Plans"
+}
 
 variable "app_service_plan_name" {
   default     = ""

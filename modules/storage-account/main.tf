@@ -2,8 +2,6 @@ data "azurerm_resource_group" "eis-migration-rg" {
   name = var.resource_group_name
 }
 
-
-
 resource "azurerm_storage_account" "strgacct" {
   name                     = var.storage_account_name
   # name                     = "strgacct4vterrafuncapp"

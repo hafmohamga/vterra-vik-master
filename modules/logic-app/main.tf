@@ -7,8 +7,6 @@ data "azurerm_storage_account" "eisstrgacclogicapp" {
   resource_group_name = data.azurerm_resource_group.eis-migration-rg.name
 }
 
-
-
 resource "azurerm_logic_app_workflow" "main" {
   name                = var.logic_app_name_workflow
   location            = data.azurerm_resource_group.eis-migration-rg.location
@@ -17,14 +15,14 @@ resource "azurerm_logic_app_workflow" "main" {
 }
 
 
-# resource "azurerm_storage_account" "storageAccount" {
-#   name                     = var.storage_account_name
-#   resource_group_name      = var.resource_group_name
-#   location                 = var.location
-#   account_tier             = "Standard"
-#   account_replication_type = "LRS"
-#   depends_on = [azurerm_resource_group.rg]
-# }
+resource "azurerm_storage_account" "storageAccount" {
+  name                     = var.logic_storage_account_name    # var.storage_account_name
+  resource_group_name      = var.resource_group_name
+  location                 = data.azurerm_resource_group.eis-migration-rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  # depends_on = [azurerm_resource_group.rg]
+}
 
 resource "azurerm_app_service_plan" "service_plan" {
   name                = var.logic_app_name_standard
