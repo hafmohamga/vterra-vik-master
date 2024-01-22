@@ -48,17 +48,17 @@ variable "resource_group_name" {
 
 ##################### App Service #####################
 
-variable "kind" {
-  description = "Kind of the Application Service Plan"
-}
+# variable "kind" {
+#   description = "Kind of the Application Service Plan"
+# }
 
-variable "sku_tier" {
-  description = "SKU Tier of the Application Service Plan"
-}
+# variable "sku_tier" {
+#   description = "SKU Tier of the Application Service Plan"
+# }
 
-variable "sku_size" {
-  description = "SKU Size of the Application Service Plan"
-}
+# variable "sku_size" {
+#   description = "SKU Size of the Application Service Plan"
+# }
 
 variable "app_service_plan_name" {
   type        = string
@@ -66,10 +66,10 @@ variable "app_service_plan_name" {
   description = "This variable defines the application name used to build resources.  It must be unique on Azure."
 }
 
-variable "app_service_win_app_name" {
-  type        = string
-  default = ""
-  description = "This variable defines the application name used to build resources.  It must be unique on Azure."
-}
+# variable "app_service_win_app_name" {
+#   type        = string
+#   default = ""
+#   description = "This variable defines the application name used to build resources.  It must be unique on Azure."
+# }
 
 
